@@ -79,9 +79,12 @@ RUN groupadd --system --gid 1000 rails || true && \
     chown -R rails:rails /rails/public/uploads && \
     chmod -R 755 /rails/public/uploads
 
+# Ensure that the /rails/public/uploads/uploads folder exists, create if it doesn't
+RUN mkdir -p /rails/public/uploads/uploads
+
 # Provide sudo permissions and change ownership/permissions for /rails/public/uploads/uploads
 RUN echo "rails ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    sudo chown -R rails:rails /rails/public/uploads && \
+    sudo chown -R rails:rails /rails/public/uploads/uploads && \
     sudo chmod -R 755 /rails/public/uploads/uploads
 
 USER rails

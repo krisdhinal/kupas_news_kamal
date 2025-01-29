@@ -6,6 +6,7 @@ Trestle.resource(:news) do
   form do |news|
     text_field :title
     text_area :body 
+    select :category_id, Category.all.map { |category| [category.name, category.id] }, label: "Category"
     file_field :image
 
     if news.errors.any?
@@ -22,6 +23,7 @@ Trestle.resource(:news) do
   table do
     column :title
     column :body
+    column :category, ->(news) { news.category.name }
     column :image do |news|
       image_tag(news.image.url, style: "width: 90px; height: 80px; border-radius: 50%;") if news.image?
     end

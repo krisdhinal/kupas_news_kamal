@@ -8,7 +8,6 @@ class PagesController < ApplicationController
       @news = News.all.order(created_at: :desc)
     end
     @latest_news = News.order(created_at: :desc).first
-    @categories = Category.all
   end
 
   def contact

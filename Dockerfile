@@ -70,23 +70,23 @@ FROM base
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
-# Run and own only the runtime files as a non-root user for security
-RUN groupadd --system --gid 1000 rails || true && \
+# Ensure required directories exist before setting permissions
+RUN mkdir -p /rails/public/uploads db log storage tmp && \
+    groupadd --system --gid 1000 rails || true && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash || true && \
     groupadd --system --gid 33 www-data || true && \
     useradd --uid 33 --gid 33 --create-home --shell /bin/bash www-data || true && \
-    chown -R rails:rails db log storage tmp && \
-    chown -R rails:rails /rails/public/uploads && \
+    chown -R rails:rails db log storage tmp /rails/public/uploads && \
     chmod -R 755 /rails/public/uploads
 
 # Ensure that the /rails/public/uploads/uploads folder exists, create if it doesn't
 RUN mkdir -p /rails/public/uploads/uploads
 
-# Provide sudo permissions and change ownership/permissions for /rails/public/uploads/uploads
-RUN echo "rails ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    sudo chown -R rails:rails /rails/public/uploads/uploads && \
-    sudo chmod -R 755 /rails/public/uploads/uploads
+# Change ownership and permissions for uploads
+RUN chown -R rails:rails /rails/public/uploads/uploads && \
+    chmod -R 755 /rails/public/uploads/uploads
 
+# Run as non-root user for security
 USER rails
 
 # Entrypoint prepares the database.

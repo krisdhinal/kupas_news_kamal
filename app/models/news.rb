@@ -15,6 +15,8 @@ class News < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validate :image_size_validation
+  validates :title, presence: true
+  validates :body, presence: true
   # Define a search scope for SQLite
   scope :search, ->(query) {
     if connection.adapter_name.downcase.include?('sqlite')

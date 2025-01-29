@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
   def index
-    @categories = Category.all
     if params[:category_id].present?
-      @news = News.where(category_id: params[:category_id])
+      @category = Category.find(params[:category_id])
+      @news = News.where(category_id: @category.id)
     else
+      @category = nil
       @news = News.all.order(created_at: :desc)
     end
     @latest_news = News.order(created_at: :desc).first
+    @categories = Category.all
   end
 
   def contact

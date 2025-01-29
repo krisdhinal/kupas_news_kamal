@@ -62,9 +62,15 @@
                 </div>
               <% end %>
             <% else %>
-                <div class="no-news-notification">
-                  <p>Belum ada postingan berita.</p>
-                </div>
+                <% if @category.present? %>
+                  <div class="no-news-notification">
+                    <p>Belum ada postingan berita <strong><%= @category.name %></strong>.</p>
+                  </div>
+                <% else %>
+                  <div class="no-news-notification">
+                    <p>Belum ada postingan berita.</p>
+                  </div>
+                <% end %>
             <% end %>
             <div class="col-12">
               <div class="row">

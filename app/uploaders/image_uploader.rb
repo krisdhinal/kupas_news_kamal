@@ -8,6 +8,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  # Validasi ukuran file
+  def size_range
+    1..2.megabytes
+  end
+
+  # Menambahkan pesan error custom
+  def size_error_message
+    "File anda terlalu besar. Maksimal ukuran file adalah 2 MB."
+  end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir

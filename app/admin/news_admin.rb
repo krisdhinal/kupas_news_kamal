@@ -8,6 +8,12 @@ Trestle.resource(:news) do
     text_area :body 
     file_field :image
 
+    if news.errors.any?
+      news.errors.full_messages.each do |message|
+        concat content_tag(:div, message, class: "alert alert-danger")
+      end
+    end
+
     # Tampilkan tombol simpan
     # submit
   end

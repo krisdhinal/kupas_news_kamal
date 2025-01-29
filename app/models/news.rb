@@ -13,6 +13,8 @@
 class News < ApplicationRecord
   # has_one_attached :image
   mount_uploader :image, ImageUploader
+
+  validate :image_size_validation
   # Define a search scope for SQLite
   scope :search, ->(query) {
     if connection.adapter_name.downcase.include?('sqlite')
@@ -21,4 +23,12 @@ class News < ApplicationRecord
       where('title ILIKE ?', "%#{query}%")
     end
   }
+
+  private
+
+  def image_size_validation
+    if image.present? && image.size > 2.megabytes
+      errors.add(:image, "File anda terlalu besar. Maksimal ukuran file adalah 2 MB.")
+    end
+  end
 end

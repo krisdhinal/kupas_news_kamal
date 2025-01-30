@@ -2,17 +2,13 @@
 #
 # Table name: news
 #
-#  id          :integer          not null, primary key
+#  id          :string           not null, primary key
 #  title       :string
 #  body        :text
+#  image       :string
+#  category_id :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  image       :string
-#  category_id :integer
-#
-# Indexes
-#
-#  index_news_on_category_id  (category_id)
 #
 
 require "test_helper"

@@ -2,22 +2,21 @@
 #
 # Table name: news
 #
-#  id          :integer          not null, primary key
+#  id          :string           not null, primary key
 #  title       :string
 #  body        :text
+#  image       :string
+#  category_id :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  image       :string
-#  category_id :integer
-#
-# Indexes
-#
-#  index_news_on_category_id  (category_id)
 #
 
 class News < ApplicationRecord
   # has_one_attached :image
-  belongs_to :category
+  self.primary_key = :id
+  belongs_to :category, optional: true
+  before_create :set_uuid
+
   mount_uploader :image, ImageUploader
 
   validate :image_size_validation
@@ -34,6 +33,10 @@ class News < ApplicationRecord
   }
 
   private
+
+  def set_uuid
+    self.id = SecureRandom.uuid if id.blank?
+  end
 
   def image_size_validation
     if image.present? && image.size > 2.megabytes

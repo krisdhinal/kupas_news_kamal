@@ -3,11 +3,12 @@ class PagesController < ApplicationController
     if params[:category_id].present?
       @category = Category.find(params[:category_id])
       @news = News.where(category_id: @category.id)
+      @latest_news = nil # Tidak ada latest news jika kategori dipilih
     else
       @category = nil
       @news = News.all.order(created_at: :desc)
+      @latest_news = News.order(created_at: :desc).first
     end
-    @latest_news = News.order(created_at: :desc).first
   end
 
   def contact

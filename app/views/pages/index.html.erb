@@ -6,8 +6,8 @@
           <h2 class="section-title">Latest News</h2>
         </div>
         <div class="col-lg-8 mb-5 mb-lg-0">
-          <div class="row">
-            <% if @latest_news.present? %>
+          <div class="row"> 
+            <% if @category.nil? && @latest_news.present? %>
               <div class="col-12 mb-4">
                 <article class="card article-card">
                   <a href="/news_detail">
@@ -20,8 +20,10 @@
                   </a>
                   <div class="card-body px-0 pb-1">
                     <ul class="post-meta mb-2">
-                      <li> <a href="#!">travel</a>
-                        <a href="#!">news</a>
+                      <li> 
+                        <% if @latest_news.category.present? %>
+                          <a href="<%= root_path(category_id: @latest_news.category.id) %>"><%= @latest_news.category.name %></a>
+                        <% end %>
                       </li>
                     </ul>
                     <h2 class="h1"><a class="post-title" href="article.html"><%= @latest_news.title %></a></h2>
@@ -31,7 +33,7 @@
                   </div>
                 </article>
               </div>
-            <% else %>
+            <% elsif @category.nil? %>
               <div class="no-news-notification">
                   <p>Belum ada postingan berita paling terbaru.</p>
               </div>

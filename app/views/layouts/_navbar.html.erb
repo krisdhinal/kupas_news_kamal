@@ -22,7 +22,10 @@
             </a>
             <div class="dropdown-menu"> 
               <% @categories.each do |category| %>
-                <%= link_to category.name, root_path(category_id: category.id), class: "dropdown-item" %>
+                <%= link_to root_path(category_id: category.id), class: "dropdown-item" do %>
+                  <i class="<%= category.icon %>"></i>
+                  <%= category.name %>
+                <% end %>
               <% end %>
             </div>
           </li>

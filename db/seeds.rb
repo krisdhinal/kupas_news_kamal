@@ -1,10 +1,12 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-# User.create!(email: 'admin@kupas.com', password: 'password', password_confirmation: 'password')
+Category.delete_all
+
+Category.create!([
+  { name: "Jabar", icon: "fa fa-map" },
+  { name: "Politik", icon: "fa fa-users" },
+  { name: "Gaya Hidup", icon: "fa-solid fa-shirt" },
+  { name: "Sport", icon: "fa-brands fa-dribbble" },
+  { name: "Ekonomi", icon: "fa-solid fa-dollar-sign" },
+  { name: "Bencana Alam", icon: "fa-solid fa-wind" },
+  { name: "Kriminal", icon: "fa-solid fa-id-card" },
+  { name: "Budaya", icon: "fa-solid fa-masks-theater" }
+])

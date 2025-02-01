@@ -9,6 +9,11 @@ class PagesController < ApplicationController
       @news = News.all.order(created_at: :desc)
       @latest_news = News.order(created_at: :desc).first
     end
+
+    if params[:s].present?
+      search_query = params[:s]
+      @news = @news.where("LOWER(title) LIKE ?", "%#{search_query}%")
+    end
   end
 
   def contact

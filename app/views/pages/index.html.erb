@@ -63,7 +63,7 @@
                   </article>
                 </div>
               <% end %>
-            <% else %>
+            <% elsif %>
                 <% if @category.present? %>
                   <div class="no-news-notification">
                     <p>Belum ada postingan berita <strong><%= @category.name %></strong>.</p>
@@ -73,6 +73,8 @@
                     <p>Belum ada postingan berita.</p>
                   </div>
                 <% end %>
+            <% else %>
+              <p>No news found for "<%= params[:s] %>".</p>
             <% end %>
             <div class="col-12">
               <div class="row">

@@ -25,6 +25,8 @@ gem 'trestle-auth'
 gem 'trestle-search'
 gem 'carrierwave'
 gem 'annotate'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

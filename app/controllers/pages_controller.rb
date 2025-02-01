@@ -14,6 +14,7 @@ class PagesController < ApplicationController
       search_query = params[:s]
       @news = @news.where("LOWER(title) LIKE ?", "%#{search_query}%")
     end
+    @news = @news.page(params[:page]).per(4)
   end
 
   def contact

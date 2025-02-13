@@ -9,6 +9,7 @@
 #  category_id :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  read_time   :integer
 #
 
 class News < ApplicationRecord
@@ -16,6 +17,7 @@ class News < ApplicationRecord
   self.primary_key = :id
   belongs_to :category, optional: true
   before_create :set_uuid
+  before_save :calculate_read_time
 
   mount_uploader :image, ImageUploader
 
@@ -42,5 +44,11 @@ class News < ApplicationRecord
     if image.present? && image.size > 2.megabytes
       errors.add(:image, "File anda terlalu besar. Maksimal ukuran file adalah 2 MB.")
     end
+  end
+
+  def calculate_read_time
+    words_per_minute = 200.0
+    word_count = body.split.size
+    self.read_time = (word_count / words_per_minute).ceil
   end
 end

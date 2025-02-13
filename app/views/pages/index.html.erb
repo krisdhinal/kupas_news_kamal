@@ -12,8 +12,8 @@
                 <article class="card article-card">
                   <a href="/news_detail">
                     <div class="card-image">
-                      <div class="post-info"> <span class="text-uppercase">04 Jun 2021</span>
-                        <span class="text-uppercase">3 minutes read</span>
+                      <div class="post-info"> <span class="text-uppercase"><%= @latest_news.created_at.strftime("%d %b %Y") %></span>
+                        <span class="text-uppercase"><%= @latest_news.read_time %> minutes read</span>
                       </div>
                       <%= image_tag (@latest_news.image.url), loading: "lazy", decoding: "async", alt: "Post Thumbnail", class: "w-100" %>
                     </div>
@@ -44,8 +44,8 @@
                   <article class="card article-card article-card-sm h-100">
                     <a href="article.html">
                       <div class="card-image">
-                        <div class="post-info"> <span class="text-uppercase">03 Jun 2021</span>
-                          <span class="text-uppercase">2 minutes read</span>
+                        <div class="post-info"> <span class="text-uppercase"><%= news.created_at.strftime("%d %b %Y") %></span>
+                          <span class="text-uppercase"><%= news.read_time %> minutes read</span>
                         </div>
                         <%= image_tag (news.image.url), loading: "lazy", decoding: "async", alt: "Post Thumbnail", class: "w-100" %>
                       </div>

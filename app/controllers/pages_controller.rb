@@ -17,6 +17,13 @@ class PagesController < ApplicationController
     @news = @news.page(params[:page]).per(4)
   end
 
+  def show
+    @news = News.find_by(id: params[:id])
+    if @news.nil?
+      redirect_to news_index_path, alert: "News not found"
+    end
+  end
+
   def contact
   end
 

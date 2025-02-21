@@ -10,14 +10,12 @@
             <% if @category.nil? && @latest_news.present? %>
               <div class="col-12 mb-4">
                 <article class="card article-card">
-                  <a href="/news_detail">
-                    <div class="card-image">
-                      <div class="post-info"> <span class="text-uppercase"><%= @latest_news.created_at.strftime("%d %b %Y") %></span>
-                        <span class="text-uppercase"><%= @latest_news.read_time %> minutes read</span>
-                      </div>
-                      <%= image_tag (@latest_news.image.url), loading: "lazy", decoding: "async", alt: "Post Thumbnail", class: "w-100" %>
+                  <div class="card-image">
+                    <div class="post-info"> <span class="text-uppercase"><%= @latest_news.created_at.strftime("%d %b %Y") %></span>
+                      <span class="text-uppercase"><%= @latest_news.read_time %> minutes read</span>
                     </div>
-                  </a>
+                    <%= image_tag (@latest_news.image.url), loading: "lazy", decoding: "async", alt: "Post Thumbnail", class: "w-100" %>
+                  </div>
                   <div class="card-body px-0 pb-1">
                     <ul class="post-meta mb-2">
                       <li> 
@@ -26,9 +24,9 @@
                         <% end %>
                       </li>
                     </ul>
-                    <h2 class="h1"><a class="post-title" href="article.html"><%= @latest_news.title %></a></h2>
+                    <h2 class="h1"><a class="post-title"><%= @latest_news.title %></a></h2>
                     <p class="card-text"><%= truncate(@latest_news.body, length: 100) %></p>
-                    <div class="content"> <a class="read-more-btn" href="article.html">Read Full Article</a>
+                    <div class="content">
                     </div>
                   </div>
                 </article>
@@ -55,9 +53,9 @@
                         <li> <a href="#!"><%= news.category.name %></a>
                         </li>
                       </ul>
-                      <h2><a class="post-title" href="article.html"><%= news.title %></a></h2>
+                      <h2><a class="post-title" href="<%= news_path(news) %>"><%= news.title %></a></h2>
                       <p class="card-text"><%= truncate(news.body, length: 100) %></p>
-                      <div class="content"> <a class="read-more-btn" href="article.html">Read Full Article</a>
+                      <div class="content"> <a class="read-more-btn" href="<%= news_path(news) %>">Read Full Article</a>
                       </div>
                     </div>
                   </article>
